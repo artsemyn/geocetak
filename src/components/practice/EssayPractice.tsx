@@ -30,9 +30,12 @@ import {
   Lightbulb,
   Assignment,
   AutoAwesome,
+  Star,
 } from '@mui/icons-material';
 import { useEssayStore } from '../../stores/essayStore';
 import { useUserStore } from '../../stores/userStore';
+import PageContainer from '../layout/PageContainer';
+import PageHeader from '../layout/PageHeader';
 
 interface EssayQuestion {
   id: string;
@@ -117,49 +120,49 @@ const EssayCard: React.FC<{ question: EssayQuestion; onSelect: () => void }> = (
     <Card 
       sx={{ 
         height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        transition: 'all 0.3s ease',
         '&:hover': {
           transform: 'translateY(-4px)',
-          boxShadow: 6,
-          transition: 'all 0.3s ease'
+          boxShadow: 4,
         }
       }}
     >
-      <CardContent sx={{ p: 3 }}>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
-          <Chip 
-            label={question.difficulty.toUpperCase()} 
-            color={getDifficultyColor(question.difficulty) as any}
-            size="small"
-          />
-          <Chip 
-            label={`${question.xpReward} XP`} 
-            color="primary" 
-            size="small"
-          />
-        </Box>
+      <CardContent sx={{ p: 3, flexGrow: 1 }}>
+        <Stack direction="row" justifyContent="space-between" alignItems="flex-start" sx={{ mb: 2 }}>
+            <Box>
+                <Chip 
+                    label={question.difficulty.toUpperCase()} 
+                    color={getDifficultyColor(question.difficulty)}
+                    size="small"
+                    sx={{ mb: 1.5 }}
+                />
+                <Typography variant="h6" fontWeight="bold">
+                    Esai #{question.id.split('-')[2]}
+                </Typography>
+            </Box>
+            <Chip 
+                label={`${question.xpReward} XP`}
+                color="primary"
+                icon={<Star />}
+            />
+        </Stack>
         
-        <Typography variant="h6" gutterBottom fontWeight="bold">
-          Essay #{question.id.split('-')[2]}
+        <Typography variant="body2" color="text.secondary" paragraph sx={{ minHeight: 60 }}>
+          {question.question}
         </Typography>
         
-        <Typography variant="body2" color="text.secondary" paragraph>
-          {question.question.substring(0, 150)}...
-        </Typography>
-        
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3 }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-            <Timer sx={{ fontSize: 16, color: 'text.secondary' }} />
-            <Typography variant="caption">
-              {question.timeLimit} menit
-            </Typography>
-          </Box>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-            <TrendingUp sx={{ fontSize: 16, color: 'text.secondary' }} />
-            <Typography variant="caption">
-              Max {question.maxScore} poin
-            </Typography>
-          </Box>
-        </Box>
+        <Stack direction="row" spacing={2} sx={{ color: 'text.secondary', mb: 3 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                <Timer sx={{ fontSize: 18 }} />
+                <Typography variant="body2">{question.timeLimit} menit</Typography>
+            </Box>
+             <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                <TrendingUp sx={{ fontSize: 18 }} />
+                <Typography variant="body2">Max {question.maxScore} poin</Typography>
+            </Box>
+        </Stack>
         
         <Button 
           variant="contained" 
@@ -167,7 +170,7 @@ const EssayCard: React.FC<{ question: EssayQuestion; onSelect: () => void }> = (
           onClick={onSelect}
           startIcon={<Assignment />}
         >
-          Mulai Essay
+          Mulai Esai
         </Button>
       </CardContent>
     </Card>
@@ -594,59 +597,45 @@ const EssayPractice: React.FC = () => {
   // Question selection view
   if (!selectedQuestion) {
     return (
-      <Box sx={{ bgcolor: 'grey.50', minHeight: 'calc(100vh - 80px)' }}>
-        <Container maxWidth="xl" sx={{ py: 4 }}>
-          <Box sx={{ mb: 4 }}>
-            <Typography variant="h3" component="h1" gutterBottom fontWeight="bold">
-              📝 Latihan Soal Essay
-            </Typography>
-            <Typography variant="h6" color="text.secondary" paragraph>
-              Tingkatkan pemahaman dengan soal essay yang dievaluasi oleh AI tutor
-            </Typography>
-            
-            <Alert severity="info" sx={{ mb: 3 }}>
-              💡 Setiap essay akan dievaluasi otomatis oleh AI berdasarkan kriteria: pemahaman konsep, 
-              kejelasan penjelasan, langkah matematis, dan kesimpulan.
-            </Alert>
-          </Box>
-
-          <Grid container spacing={3}>
-            {essayQuestions.map((question) => (
-              <Grid xs={12} md={6} lg={4} key={question.id}>
-                <EssayCard 
-                  question={question} 
-                  onSelect={() => handleQuestionSelect(question)}
-                />
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
-      </Box>
+      <PageContainer>
+        <PageHeader
+            title="Latihan Soal Esai"
+            subtitle="Asah pemahaman Anda dengan soal esai yang dievaluasi oleh AI."
+        />
+        <Grid container spacing={3}>
+          {essayQuestions.map((question) => (
+            <Grid item xs={12} md={6} lg={4} key={question.id}>
+              <EssayCard 
+                question={question} 
+                onSelect={() => handleQuestionSelect(question)}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </PageContainer>
     );
   }
 
   // Essay writing or results view
   return (
-    <Box sx={{ bgcolor: 'grey.50', minHeight: 'calc(100vh - 80px)' }}>
-      <Container maxWidth="xl" sx={{ py: 4 }}>
-        {showResult && evaluationResult ? (
-          <EssayResult 
-            result={evaluationResult}
-            onRetry={() => {
-              setShowResult(false);
-              setEvaluationResult(null);
-            }}
-            onNext={handleNext}
-          />
-        ) : (
-          <EssayWriter 
-            question={selectedQuestion}
-            onSubmit={handleEssaySubmit}
-            onBack={handleBack}
-          />
-        )}
-      </Container>
-    </Box>
+    <PageContainer>
+      {showResult && evaluationResult ? (
+        <EssayResult 
+          result={evaluationResult}
+          onRetry={() => {
+            setShowResult(false);
+            setEvaluationResult(null);
+          }}
+          onNext={handleNext}
+        />
+      ) : (
+        <EssayWriter 
+          question={selectedQuestion}
+          onSubmit={handleEssaySubmit}
+          onBack={handleBack}
+        />
+      )}
+    </PageContainer>
   );
 };
 

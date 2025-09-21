@@ -65,22 +65,20 @@ const ModuleCard: React.FC<ModuleCardProps> = ({
   };
 
   return (
-    <Card 
-      sx={{ 
+    <Card
+      sx={{
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
         opacity: isAvailable ? 1 : 0.7,
         cursor: isAvailable ? 'pointer' : 'default',
-        border: '1px solid',
-        borderColor: isCompleted ? 'success.light' : isAvailable ? 'primary.light' : 'grey.300',
+        transition: 'all 0.3s ease',
         '&:hover': {
           transform: isAvailable ? 'translateY(-8px)' : 'none',
-          boxShadow: isAvailable ? '0 12px 24px rgba(0,0,0,0.15)' : 1,
-          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-          borderColor: isAvailable ? 'primary.main' : 'grey.300',
+          boxShadow: isAvailable ? 6 : 1,
         }
       }}
+      onClick={handleStartModule}
     >
       {/* Hero Section */}
       <Box
@@ -243,25 +241,15 @@ const StatCard: React.FC<{
   icon: React.ReactNode;
   color: 'primary' | 'success' | 'warning' | 'secondary';
 }> = ({ title, value, subtitle, icon, color }) => (
-  <Paper 
-    sx={{ 
-      p: 3,
-      height: '100%',
-      background: `linear-gradient(135deg, ${
-        color === 'primary' ? '#E3F2FD, #BBDEFB' :
-        color === 'success' ? '#E8F5E8, #C8E6C9' :
-        color === 'warning' ? '#FFF3E0, #FFE0B2' :
-        '#FCE4EC, #F8BBD9'
-      })`,
-      border: '1px solid',
-      borderColor: `${color}.light`,
-      '&:hover': { 
-        transform: 'translateY(-4px)', 
-        boxShadow: 4,
-        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-      }
-    }}
-  >
+    <Paper
+      sx={{
+        p: 3,
+        height: '100%',
+        background: (theme) => `linear-gradient(135deg, ${theme.palette.background.paper} 0%, ${theme.palette[color].light} 100%)`,
+        border: '1px solid',
+        borderColor: `${color}.light`,
+      }}
+    >
     <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 2 }}>
       <Avatar 
         sx={{ 
@@ -352,38 +340,12 @@ const Dashboard: React.FC = () => {
   return (
     <PageContainer>
       <PageHeader
-        title="Selamat Datang di GeoCetak!"
-        subtitle="Platform pembelajaran interaktif untuk menguasai geometri bangun ruang dengan visualisasi 3D"
-      >
-        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ maxWidth: 600, mt: 3 }}>
-          {quickActions.map((action, index) => (
-            <Button
-              key={index}
-              variant={action.variant}
-              color={action.color}
-              startIcon={action.icon}
-              onClick={() => navigate(action.path)}
-              size="large"
-              sx={{
-                px: 3,
-                py: 1.5,
-                fontWeight: 600,
-                flex: 1,
-                '&:hover': {
-                  transform: 'translateY(-2px)',
-                  boxShadow: 3
-                },
-                transition: 'all 0.2s ease'
-              }}
-            >
-              {action.label}
-            </Button>
-          ))}
-        </Stack>
-      </PageHeader>
+        title={`Selamat Datang, ${profile?.name || 'Siswa'}!`}
+        subtitle="Platform pembelajaran interaktif untuk menguasai geometri bangun ruang."
+      />
 
         {/* Stats Overview */}
-        <Grid container spacing={3} sx={{ mb: 6 }}>
+        <Grid container spacing={3} sx={{ mb: 4 }}>
           <Grid xs={12} sm={6} md={3}>
             <StatCard
               title="Current Level"
@@ -426,26 +388,21 @@ const Dashboard: React.FC = () => {
         </Grid>
 
         {/* Learning Modules */}
-        <Box sx={{ mb: 6 }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
-            <BookmarkBorder sx={{ mr: 2, color: 'primary.main' }} />
-            <Typography variant="h4" fontWeight="bold">
-              Modul Pembelajaran
-            </Typography>
-          </Box>
-          <Typography variant="body1" color="text.secondary" paragraph sx={{ mb: 4 }}>
-            Ikuti urutan modul untuk pemahaman yang optimal. Setiap modul dilengkapi dengan visualisasi 3D interaktif, 
-            latihan soal, dan evaluasi AI.
-          </Typography>
-          
-          <Grid container spacing={4}>
-            {modules.map((module) => (
-              <Grid xs={12} md={6} lg={4} key={module.id}>
-                <ModuleCard {...module} />
-              </Grid>
-            ))}
-          </Grid>
-        </Box>
+        <Box sx={{ mb: 4 }}>
+        <Typography variant="h4" fontWeight="bold" gutterBottom>
+          Modul Pembelajaran
+        </Typography>
+        <Typography variant="body1" color="text.secondary" paragraph>
+          Pilih modul di bawah ini untuk memulai perjalanan belajar Anda.
+        </Typography>
+        <Grid container spacing={4}>
+          {modules.map((module) => (
+            <Grid item xs={12} md={6} lg={4} key={module.id}>
+              <ModuleCard {...module} />
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
 
         {/* Progress Summary */}
         {overallProgress > 0 && (
