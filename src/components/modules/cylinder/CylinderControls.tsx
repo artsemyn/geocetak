@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Card,
   CardContent,
-  Typography,
   Slider,
   Switch,
   FormControlLabel,
@@ -13,6 +12,8 @@ import {
   Stack,
 } from '@mui/material';
 import { PlayArrow, Pause, Refresh, ViewInAr } from '@mui/icons-material';
+import { Container } from '@mui/material';
+import { Typography } from '@mui/material';
 import { useCylinderStore } from '../../../stores/cylinderStore';
 
 const CylinderControls: React.FC = () => {
@@ -41,7 +42,7 @@ const CylinderControls: React.FC = () => {
   const formatNumber = (num: number) => num.toFixed(2);
 
   return (
-    <Card>
+    <Container>
       <CardContent>
         <Typography variant="h6" gutterBottom>
           Kontrol Tabung
@@ -151,7 +152,7 @@ const CylinderControls: React.FC = () => {
             Hasil Perhitungan
           </Typography>
           <Grid container spacing={1}>
-            <Grid item xs={6}>
+            <Grid xs={6}>
               <Chip
                 label={`V = ${formatNumber(volume)}`}
                 color="primary"
@@ -159,7 +160,7 @@ const CylinderControls: React.FC = () => {
                 sx={{ width: '100%' }}
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid xs={6}>
               <Chip
                 label={`LP = ${formatNumber(surfaceArea)}`}
                 color="secondary"
@@ -170,7 +171,7 @@ const CylinderControls: React.FC = () => {
           </Grid>
         </Box>
       </CardContent>
-    </Card>
+    </Container>
   );
 };
 

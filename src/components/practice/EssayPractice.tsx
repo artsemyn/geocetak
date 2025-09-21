@@ -31,8 +31,8 @@ import {
   Assignment,
   AutoAwesome,
 } from '@mui/icons-material';
-import { useEssayStore } from '../stores/essayStore';
-import { useUserStore } from '../stores/userStore';
+import { useEssayStore } from '../../stores/essayStore';
+import { useUserStore } from '../../stores/userStore';
 
 interface EssayQuestion {
   id: string;
@@ -280,7 +280,7 @@ const EssayWriter: React.FC<{
             </AccordionSummary>
             <AccordionDetails>
               <Grid container spacing={2}>
-                <Grid item xs={6} md={3}>
+                <Grid xs={6} md={3}>
                   <Box sx={{ textAlign: 'center', p: 2, bgcolor: 'primary.light', borderRadius: 2 }}>
                     <Typography variant="h6" color="primary.dark" fontWeight="bold">
                       {question.rubric.understanding}%
@@ -290,7 +290,7 @@ const EssayWriter: React.FC<{
                     </Typography>
                   </Box>
                 </Grid>
-                <Grid item xs={6} md={3}>
+                <Grid xs={6} md={3}>
                   <Box sx={{ textAlign: 'center', p: 2, bgcolor: 'secondary.light', borderRadius: 2 }}>
                     <Typography variant="h6" color="secondary.dark" fontWeight="bold">
                       {question.rubric.explanation}%
@@ -300,7 +300,7 @@ const EssayWriter: React.FC<{
                     </Typography>
                   </Box>
                 </Grid>
-                <Grid item xs={6} md={3}>
+                <Grid xs={6} md={3}>
                   <Box sx={{ textAlign: 'center', p: 2, bgcolor: 'success.light', borderRadius: 2 }}>
                     <Typography variant="h6" color="success.dark" fontWeight="bold">
                       {question.rubric.calculation}%
@@ -310,7 +310,7 @@ const EssayWriter: React.FC<{
                     </Typography>
                   </Box>
                 </Grid>
-                <Grid item xs={6} md={3}>
+                <Grid xs={6} md={3}>
                   <Box sx={{ textAlign: 'center', p: 2, bgcolor: 'warning.light', borderRadius: 2 }}>
                     <Typography variant="h6" color="warning.dark" fontWeight="bold">
                       {question.rubric.conclusion}%
@@ -452,7 +452,7 @@ const EssayResult: React.FC<{
               };
               
               return (
-                <Grid item xs={12} sm={6} key={criterion}>
+                <Grid xs={12} sm={6} key={criterion}>
                   <Paper sx={{ p: 3, textAlign: 'center', height: '100%' }}>
                     <Typography variant="h4" color="primary" fontWeight="bold">
                       {score}
@@ -594,55 +594,59 @@ const EssayPractice: React.FC = () => {
   // Question selection view
   if (!selectedQuestion) {
     return (
-      <Container maxWidth="lg" sx={{ py: 4 }}>
-        <Box sx={{ mb: 4 }}>
-          <Typography variant="h3" component="h1" gutterBottom fontWeight="bold">
-            📝 Latihan Soal Essay
-          </Typography>
-          <Typography variant="h6" color="text.secondary" paragraph>
-            Tingkatkan pemahaman dengan soal essay yang dievaluasi oleh AI tutor
-          </Typography>
-          
-          <Alert severity="info" sx={{ mb: 3 }}>
-            💡 Setiap essay akan dievaluasi otomatis oleh AI berdasarkan kriteria: pemahaman konsep, 
-            kejelasan penjelasan, langkah matematis, dan kesimpulan.
-          </Alert>
-        </Box>
+      <Box sx={{ bgcolor: 'grey.50', minHeight: 'calc(100vh - 80px)' }}>
+        <Container maxWidth="xl" sx={{ py: 4 }}>
+          <Box sx={{ mb: 4 }}>
+            <Typography variant="h3" component="h1" gutterBottom fontWeight="bold">
+              📝 Latihan Soal Essay
+            </Typography>
+            <Typography variant="h6" color="text.secondary" paragraph>
+              Tingkatkan pemahaman dengan soal essay yang dievaluasi oleh AI tutor
+            </Typography>
+            
+            <Alert severity="info" sx={{ mb: 3 }}>
+              💡 Setiap essay akan dievaluasi otomatis oleh AI berdasarkan kriteria: pemahaman konsep, 
+              kejelasan penjelasan, langkah matematis, dan kesimpulan.
+            </Alert>
+          </Box>
 
-        <Grid container spacing={3}>
-          {essayQuestions.map((question) => (
-            <Grid item xs={12} md={6} lg={4} key={question.id}>
-              <EssayCard 
-                question={question} 
-                onSelect={() => handleQuestionSelect(question)}
-              />
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
+          <Grid container spacing={3}>
+            {essayQuestions.map((question) => (
+              <Grid xs={12} md={6} lg={4} key={question.id}>
+                <EssayCard 
+                  question={question} 
+                  onSelect={() => handleQuestionSelect(question)}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+      </Box>
     );
   }
 
   // Essay writing or results view
   return (
-    <Container maxWidth="lg" sx={{ py: 4 }}>
-      {showResult && evaluationResult ? (
-        <EssayResult 
-          result={evaluationResult}
-          onRetry={() => {
-            setShowResult(false);
-            setEvaluationResult(null);
-          }}
-          onNext={handleNext}
-        />
-      ) : (
-        <EssayWriter 
-          question={selectedQuestion}
-          onSubmit={handleEssaySubmit}
-          onBack={handleBack}
-        />
-      )}
-    </Container>
+    <Box sx={{ bgcolor: 'grey.50', minHeight: 'calc(100vh - 80px)' }}>
+      <Container maxWidth="xl" sx={{ py: 4 }}>
+        {showResult && evaluationResult ? (
+          <EssayResult 
+            result={evaluationResult}
+            onRetry={() => {
+              setShowResult(false);
+              setEvaluationResult(null);
+            }}
+            onNext={handleNext}
+          />
+        ) : (
+          <EssayWriter 
+            question={selectedQuestion}
+            onSubmit={handleEssaySubmit}
+            onBack={handleBack}
+          />
+        )}
+      </Container>
+    </Box>
   );
 };
 

@@ -203,7 +203,7 @@ const ProgressSummaryPage: React.FC = () => {
 
               {/* Stats Grid */}
               <Grid container spacing={3} sx={{ mb: 4 }}>
-                <Grid item xs={12} sm={3}>
+                <Grid xs={12} sm={3}>
                   <Paper sx={{ p: 3, textAlign: 'center', bgcolor: 'primary.light' }}>
                     <Typography variant="h4" fontWeight="bold" color="primary.dark">
                       {completedLessons.length}
@@ -213,7 +213,7 @@ const ProgressSummaryPage: React.FC = () => {
                     </Typography>
                   </Paper>
                 </Grid>
-                <Grid item xs={12} sm={3}>
+                <Grid xs={12} sm={3}>
                   <Paper sx={{ p: 3, textAlign: 'center', bgcolor: 'secondary.light' }}>
                     <Typography variant="h4" fontWeight="bold" color="secondary.dark">
                       {earnedXP}
@@ -223,7 +223,7 @@ const ProgressSummaryPage: React.FC = () => {
                     </Typography>
                   </Paper>
                 </Grid>
-                <Grid item xs={12} sm={3}>
+                <Grid xs={12} sm={3}>
                   <Paper sx={{ p: 3, textAlign: 'center', bgcolor: 'success.light' }}>
                     <Typography variant="h4" fontWeight="bold" color="success.dark">
                       ~45
@@ -233,7 +233,7 @@ const ProgressSummaryPage: React.FC = () => {
                     </Typography>
                   </Paper>
                 </Grid>
-                <Grid item xs={12} sm={3}>
+                <Grid xs={12} sm={3}>
                   <Paper sx={{ p: 3, textAlign: 'center', bgcolor: 'warning.light' }}>
                     <Typography variant="h4" fontWeight="bold" color="warning.dark">
                       100%
@@ -269,10 +269,10 @@ const ProgressSummaryPage: React.FC = () => {
                   }}
                 >
                   <Grid container alignItems="center" spacing={2}>
-                    <Grid item xs={1}>
-                      <Box sx={{ 
-                        width: 40, 
-                        height: 40, 
+                    <Grid xs={1}>
+                      <Box sx={{
+                        width: 40,
+                        height: 40,
                         borderRadius: '50%',
                         bgcolor: isCompleted ? 'success.main' : 'grey.400',
                         display: 'flex',
@@ -283,7 +283,7 @@ const ProgressSummaryPage: React.FC = () => {
                         {isCompleted ? <CheckCircle /> : <Lock />}
                       </Box>
                     </Grid>
-                    <Grid item xs={7}>
+                    <Grid xs={7}>
                       <Typography variant="h6" fontWeight="bold">
                         {lesson.title}
                       </Typography>
@@ -291,14 +291,14 @@ const ProgressSummaryPage: React.FC = () => {
                         {lesson.desc}
                       </Typography>
                     </Grid>
-                    <Grid item xs={2}>
-                      <Chip 
+                    <Grid xs={2}>
+                      <Chip
                         label={`${lesson.xp} XP`}
                         color={isCompleted ? "success" : "default"}
                         variant={isCompleted ? "filled" : "outlined"}
                       />
                     </Grid>
-                    <Grid item xs={2}>
+                    <Grid xs={2}>
                       <Typography variant="body2" fontWeight="bold" color={isCompleted ? 'success.main' : 'text.secondary'}>
                         {isCompleted ? '✅ Selesai' : '⏳ Belum'}
                       </Typography>
@@ -314,7 +314,7 @@ const ProgressSummaryPage: React.FC = () => {
                 🏆 Achievement yang Diraih
               </Typography>
               <Grid container spacing={2}>
-                <Grid item xs={12} sm={6} md={3}>
+                <Grid xs={12} sm={6} md={3}>
                   <Box sx={{ textAlign: 'center' }}>
                     <EmojiEvents sx={{ fontSize: 40, color: 'warning.main', mb: 1 }} />
                     <Typography variant="subtitle1" fontWeight="bold">
@@ -325,7 +325,7 @@ const ProgressSummaryPage: React.FC = () => {
                     </Typography>
                   </Box>
                 </Grid>
-                <Grid item xs={12} sm={6} md={3}>
+                <Grid xs={12} sm={6} md={3}>
                   <Box sx={{ textAlign: 'center' }}>
                     <Star sx={{ fontSize: 40, color: 'primary.main', mb: 1 }} />
                     <Typography variant="subtitle1" fontWeight="bold">
@@ -336,7 +336,7 @@ const ProgressSummaryPage: React.FC = () => {
                     </Typography>
                   </Box>
                 </Grid>
-                <Grid item xs={12} sm={6} md={3}>
+                <Grid xs={12} sm={6} md={3}>
                   <Box sx={{ textAlign: 'center' }}>
                     <Calculate sx={{ fontSize: 40, color: 'secondary.main', mb: 1 }} />
                     <Typography variant="subtitle1" fontWeight="bold">
@@ -347,7 +347,7 @@ const ProgressSummaryPage: React.FC = () => {
                     </Typography>
                   </Box>
                 </Grid>
-                <Grid item xs={12} sm={6} md={3}>
+                <Grid xs={12} sm={6} md={3}>
                   <Box sx={{ textAlign: 'center' }}>
                     <Quiz sx={{ fontSize: 40, color: 'success.main', mb: 1 }} />
                     <Typography variant="subtitle1" fontWeight="bold">
@@ -554,7 +554,7 @@ const CylinderLessonLayout: React.FC = () => {
         {/* Main Content */}
         <Grid container spacing={3}>
           {/* Left: 3D Viewport */}
-          <Grid item xs={12} lg={8}>
+          <Grid xs={12} lg={8}>
             <Card sx={{ height: '100%', borderRadius: 3, boxShadow: 3 }}>
               <CardContent sx={{ p: 3 }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
@@ -627,17 +627,17 @@ const CylinderLessonLayout: React.FC = () => {
                   borderColor: 'grey.200'
                 }}>
                   <Grid container spacing={2} alignItems="center">
-                    <Grid item xs={12} sm={4}>
+                    <Grid xs={12} sm={4}>
                       <Typography variant="body2" color="text.secondary">
                         <strong>Jari-jari:</strong> {formatNumber(radius)} unit
                       </Typography>
                     </Grid>
-                    <Grid item xs={12} sm={4}>
+                    <Grid xs={12} sm={4}>
                       <Typography variant="body2" color="text.secondary">
                         <strong>Tinggi:</strong> {formatNumber(height)} unit
                       </Typography>
                     </Grid>
-                    <Grid item xs={12} sm={4}>
+                    <Grid xs={12} sm={4}>
                       <Typography variant="body2" color="text.secondary">
                         <strong>Status:</strong> {isAnimating ? "🔄 Rotating" : "⏸️ Static"}
                       </Typography>
@@ -649,7 +649,7 @@ const CylinderLessonLayout: React.FC = () => {
           </Grid>
 
           {/* Right: Controls & Calculations ONLY - NO PROGRESS PANEL */}
-          <Grid item xs={12} lg={4}>
+          <Grid xs={12} lg={4}>
             <Stack spacing={3}>
               {/* Parameter Controls */}
               <Card sx={{ borderRadius: 3, boxShadow: 3 }}>
@@ -848,7 +848,7 @@ const CylinderLessonLayout: React.FC = () => {
           </Grid>
 
           {/* Bottom: Learning Content */}
-          <Grid item xs={12}>
+          <Grid xs={12}>
             <Card sx={{ borderRadius: 3, boxShadow: 3 }}>
               <CardContent sx={{ p: 0 }}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -935,7 +935,7 @@ const ConceptLesson: React.FC = () => (
         { title: "Jari-jari (r)", desc: "Jarak dari pusat lingkaran alas/tutup ke tepi lingkaran", icon: "📏", color: "success" },
         { title: "Tinggi (t)", desc: "Jarak tegak lurus antara bidang alas dan tutup tabung", icon: "📐", color: "warning" }
       ].map((item, index) => (
-        <Grid item xs={12} md={6} key={index}>
+        <Grid xs={12} md={6} key={index}>
           <Paper sx={{ 
             p: 3, 
             height: '100%',
@@ -983,7 +983,7 @@ const NetLesson: React.FC = () => {
           { icon: "🟦", title: "1 Persegi Panjang", desc: "Selimut tabung", color: "primary" },
           { icon: "📏", title: "Ukuran Selimut", desc: "Panjang = 2πr, Lebar = t", color: "success" }
         ].map((item, index) => (
-          <Grid item xs={12} md={4} key={index}>
+          <Grid xs={12} md={4} key={index}>
             <Paper sx={{ 
               p: 3, 
               textAlign: 'center',
@@ -1046,7 +1046,7 @@ const FormulaLesson: React.FC = () => {
       </Alert>
       
       <Grid container spacing={4}>
-        <Grid item xs={12} md={6}>
+        <Grid xs={12} md={6}>
           <Paper sx={{ 
             p: 4, 
             border: 2,
@@ -1078,8 +1078,8 @@ const FormulaLesson: React.FC = () => {
             </Box>
           </Paper>
         </Grid>
-        
-        <Grid item xs={12} md={6}>
+
+        <Grid xs={12} md={6}>
           <Paper sx={{ 
             p: 4, 
             border: 2,
@@ -1130,7 +1130,7 @@ const FormulaLesson: React.FC = () => {
             { title: "Luas Selimut", formula: "LS = 2πrt", color: "warning" },
             { title: "Luas Alas", formula: "LA = πr²", color: "info" }
           ].map((item, index) => (
-            <Grid item xs={12} sm={6} md={3} key={index}>
+            <Grid xs={12} sm={6} md={3} key={index}>
               <Box sx={{ textAlign: 'center' }}>
                 <Typography variant="subtitle1" fontWeight="bold" color={`${item.color}.main`}>
                   {item.title}
