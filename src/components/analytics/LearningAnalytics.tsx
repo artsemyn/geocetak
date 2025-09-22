@@ -116,9 +116,9 @@ const LearningAnalytics: React.FC = () => {
           </Tooltip>
         </Box>
 
-        <Grid container spacing={3}>
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3 }}>
           {/* Overview Stats */}
-          <Grid item xs={12} md={6}>
+          <Box sx={{ flex: '1 1 300px', minWidth: 300 }}>
             <Paper variant="outlined" sx={{ p: 2 }}>
               <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
                 📊 Overview
@@ -146,10 +146,10 @@ const LearningAnalytics: React.FC = () => {
                 </Box>
               </Stack>
             </Paper>
-          </Grid>
+          </Box>
 
           {/* Engagement Stats */}
-          <Grid item xs={12} md={6}>
+          <Box sx={{ flex: '1 1 300px', minWidth: 300 }}>
             <Paper variant="outlined" sx={{ p: 2 }}>
               <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
                 🎯 Engagement
@@ -190,10 +190,10 @@ const LearningAnalytics: React.FC = () => {
                 </Box>
               </Stack>
             </Paper>
-          </Grid>
+          </Box>
 
           {/* Progress Breakdown */}
-          <Grid item xs={12}>
+          <Box sx={{ width: '100%' }}>
             <Paper variant="outlined" sx={{ p: 2 }}>
               <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
                 📈 Module Progress
@@ -214,14 +214,14 @@ const LearningAnalytics: React.FC = () => {
                 />
               </Box>
 
-              <Grid container spacing={2}>
+              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
                 {[
                   { id: 'concept', title: 'Konsep', icon: '🎯' },
                   { id: 'net', title: 'Jaring-jaring', icon: '🔄' },
                   { id: 'formula', title: 'Rumus', icon: '🧮' },
                   { id: 'quiz', title: 'Quiz', icon: '🧠' },
                 ].map((lesson) => (
-                  <Grid item xs={6} sm={3} key={lesson.id}>
+                  <Box key={lesson.id} sx={{ flex: '1 1 150px', minWidth: 150 }}>
                     <Box
                       sx={{
                         p: 1,
@@ -244,14 +244,14 @@ const LearningAnalytics: React.FC = () => {
                         <EmojiEvents sx={{ fontSize: 16, color: 'success.main', mt: 0.5 }} />
                       )}
                     </Box>
-                  </Grid>
+                  </Box>
                 ))}
-              </Grid>
+              </Box>
             </Paper>
-          </Grid>
+          </Box>
 
           {/* Recommendations */}
-          <Grid item xs={12}>
+          <Box sx={{ width: '100%' }}>
             <Paper variant="outlined" sx={{ p: 2, bgcolor: 'info.light' }}>
               <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
                 💡 Recommendations
@@ -277,8 +277,8 @@ const LearningAnalytics: React.FC = () => {
                 </Typography>
               </Stack>
             </Paper>
-          </Grid>
-        </Grid>
+          </Box>
+        </Box>
       </CardContent>
     </Card>
   );

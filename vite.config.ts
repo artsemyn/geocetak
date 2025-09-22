@@ -32,13 +32,7 @@ export default defineConfig({
       },
     },
     sourcemap: true,
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-      },
-    },
+    minify: 'esbuild',
   },
   optimizeDeps: {
     include: ['react', 'react-dom', '@mui/material', 'three'],
@@ -51,19 +45,5 @@ export default defineConfig({
   preview: {
     port: 4173,
     open: true,
-  },
-  test: {
-    globals: true,
-    environment: 'jsdom',
-    setupFiles: './src/test/setup.ts',
-    coverage: {
-      reporter: ['text', 'json', 'html'],
-      exclude: [
-        'node_modules/',
-        'src/test/',
-        '**/*.d.ts',
-        '**/*.config.*',
-      ],
-    },
   },
 });

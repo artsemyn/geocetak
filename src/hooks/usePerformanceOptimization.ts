@@ -24,11 +24,13 @@ export const useDebounce = <T extends (...args: any[]) => any>(
   callback: T,
   delay: number
 ): T => {
-  const timeoutRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<NodeJS.Timeout | undefined>();
 
   return useCallback(
-    ((...args) => {
-      clearTimeout(timeoutRef.current);
+    ((...args: Parameters<T>) => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
       timeoutRef.current = setTimeout(() => callback(...args), delay);
     }) as T,
     [callback, delay]
@@ -42,7 +44,7 @@ export const useIntersectionObserver = (
   const [isIntersecting, setIsIntersecting] = useState(false);
   const [node, setNode] = useState<Element | null>(null);
 
-  const observer = useRef<IntersectionObserver>();
+  const observer = useRef<IntersectionObserver | undefined>();
 
   useEffect(() => {
     if (observer.current) observer.current.disconnect();
