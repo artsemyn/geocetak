@@ -35,7 +35,15 @@ export default defineConfig({
     minify: 'esbuild',
   },
   optimizeDeps: {
-    include: ['react', 'react-dom', '@mui/material', 'three'],
+    include: [
+      'react', 
+      'react-dom', 
+      '@mui/material',
+      '@emotion/react',
+      '@emotion/styled',
+      'three'
+    ],
+    exclude: ['@emotion/use-insertion-effect-with-fallbacks']
   },
   server: {
     port: 3000,
