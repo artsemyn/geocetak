@@ -28,3 +28,6 @@ dist-ssr
 supabase
 supabase/.temp
 supabase/functions
+
+# Vercel
+.vercel
