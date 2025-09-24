@@ -10,12 +10,7 @@ export default defineConfig(({ mode }) => {
   const base = '/';
   
   return {
-    plugins: [react({
-      jsxImportSource: '@emotion/react',
-      babel: {
-        plugins: ['@emotion/babel-plugin']
-      }
-    })],
+    plugins: [react()],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, './src'),
@@ -54,7 +49,8 @@ export default defineConfig(({ mode }) => {
         '@emotion/react',
         '@emotion/styled',
         'three'
-      ]
+      ],
+      exclude: ['@emotion/is-prop-valid']
     },
     base: base,
     server: {

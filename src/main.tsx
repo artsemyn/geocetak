@@ -1,7 +1,6 @@
 // src/main.tsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { StyledEngineProvider } from '@mui/material/styles';
 import App from './App';
 
 // Import Plus Jakarta Sans font
@@ -16,9 +15,7 @@ if (rootElement) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <React.StrictMode>
-      <StyledEngineProvider injectFirst>
-        <App />
-      </StyledEngineProvider>
+      <App />
     </React.StrictMode>
   );
 }
