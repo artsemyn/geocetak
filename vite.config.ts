@@ -6,8 +6,8 @@ export default defineConfig(({ mode }) => {
   // Load environment variables based on the current mode
   const env = loadEnv(mode, process.cwd(), '');
 
-  // For Vercel deployment, use empty base path
-  const base = process.env.NODE_ENV === 'production' ? '' : '/';
+  // For Vercel deployment, use absolute base path
+  const base = '/';
   
   return {
     plugins: [react({
