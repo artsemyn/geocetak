@@ -5,11 +5,10 @@ import path from 'path';
 export default defineConfig(({ mode }) => {
   // Load environment variables based on the current mode
   const env = loadEnv(mode, process.cwd(), '');
-
-  // For Vercel deployment, use absolute base path
-  const base = '/';
   
   return {
+    // Base public path when served in production
+    base: mode === 'production' ? '' : '/',
     plugins: [react()],
     resolve: {
       alias: {
@@ -52,7 +51,6 @@ export default defineConfig(({ mode }) => {
       ],
       exclude: ['@emotion/is-prop-valid']
     },
-    base: base,
     server: {
       port: 3000,
       open: true,
