@@ -6,10 +6,6 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-<<<<<<< HEAD
-    "build:check": "tsc && vite build",
-=======
->>>>>>> 111dbb0eb646ab24324c5e15eb8bc9ef9b8d4819
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint . --ext ts,tsx --fix",
     "preview": "vite preview",
@@ -20,7 +16,7 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
-    "@fontsource/plus-jakarta-sans": "^5.2.8",
+    "@fontsource/plus-jakarta-sans": "^5.0.0",
     "@mui/icons-material": "^7.3.2",
     "@mui/material": "^7.3.2",
     "@react-three/drei": "^10.7.6",
